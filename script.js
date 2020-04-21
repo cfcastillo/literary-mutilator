@@ -61,7 +61,7 @@ function setParagraphText() {
 function createAnagram() {
 	let paragraph = document.getElementById('p2');
 	let pText = paragraph.innerText.split(' ');
-	//not sure exactly how the Math.random() - 0.5 works.
+	//todo: research how the below logic works.
 	paragraph.innerText = pText.sort(() => Math.random() - 0.5).join(' ');
 }
 
@@ -87,6 +87,23 @@ function rot13AssocArray() {
  * uses ascii codes to implement rot13 character substitution
  */
 function rot13AsciiCodes() {
+	//lowercase dec 97 (a) - 122 (z)
+	//uppercase dec 65 (A) - 90 (Z)
+	//String.fromCharCode(asciiCode) = string value.
+	//"A".charCodeAt() = character code for A
+	/*
+		lower case
+		97=122
+		98=121
+		...
+		109=110
+
+		upper case
+		65=90
+		66=89
+		...
+		77=78
+	*/
 	return;
 }
 
@@ -96,6 +113,7 @@ function fetchData() {
 		.then((json) => {
 			var newP = document.createElement("p");
 			var pText = document.createTextNode(json.title);
+			newP.style.color = "red";
 			newP.appendChild(pText);
 			var currentDiv = document.getElementById("p-div");
 			currentDiv.appendChild(newP);
