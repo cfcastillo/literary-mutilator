@@ -24,10 +24,8 @@ function WindowLoad(event){
 					fetchData();
 					break;
 				case "encrypt-p":
-					encryptParagraph();
-					break;
-				case "reset-form":
-					resetForm();
+					rot13AssocArray();
+					//rot13AsciiCodes();
 					break;
 				default:
 					break;
@@ -67,7 +65,28 @@ function createAnagram() {
 	paragraph.innerText = pText.sort(() => Math.random() - 0.5).join(' ');
 }
 
-function encryptParagraph() {
+/**
+ * uses associative array to implement rot13 character substitution.
+ */
+function rot13AssocArray() {
+	//todo: list half of array and have logic go backward or forward. i.e. if not found, then look at reverse value.
+	let arr = {'a':'z', 'b':'y', 'c':'x', 'd':'w', 'e':'v', 'f':'u', 'g':'t', 'h':'s', 'i':'r', 'j':'q', 'k':'p', 'l':'o', 'm':'n',
+		'z':'a', 'y':'b', 'x':'c', 'w':'d', 'v':'e', 'u':'f', 't':'g', 's':'h', 'r':'i', 'q':'j', 'p':'k', 'o':'l', 'n':'m'};
+	let paragraphs = document.querySelectorAll(('p'));
+	for (let paragraph of paragraphs){
+		let replaceChars = function(c){
+			//if found, returns substitute char. If not found, returns the character.
+			//todo: need to handle case.
+			return arr[c] || c;
+		};
+		paragraph.innerText = paragraph.innerText.split('').map(replaceChars).join('');
+	}
+}
+
+/**
+ * uses ascii codes to implement rot13 character substitution
+ */
+function rot13AsciiCodes() {
 	return;
 }
 
@@ -83,7 +102,4 @@ function fetchData() {
 		})
 }
 
-function resetForm() {
-	return;
-}
 
